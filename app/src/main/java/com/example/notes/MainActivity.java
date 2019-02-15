@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.LinearLayout;
 
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
         initRecyclerView();
         initFakeNotes();
+        setSupportActionBar((Toolbar) findViewById(R.id.notes_toolbar));
+        setTitle("Notes");
     }
 
     private void initFakeNotes() {
