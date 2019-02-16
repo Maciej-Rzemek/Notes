@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".NoteActivity"
     android:background="@color/lightYellow">
 
@@ -22,8 +23,9 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <EditText
+    <com.example.notes.LinedEditText
         android:id="@+id/note_text"
+        android:gravity="top"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="23sp"
