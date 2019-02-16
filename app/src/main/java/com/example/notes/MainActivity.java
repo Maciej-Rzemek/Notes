@@ -1,12 +1,13 @@
 package com.example.notes;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.widget.LinearLayout;
+
 
 import com.example.notes.adapters.NotesRecyclerAdapter;
 import com.example.notes.models.Note;
@@ -14,7 +15,7 @@ import com.example.notes.utils.SpacingItemDecorator;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NotesRecyclerAdapter.OnNoteListener {
 
     private static final String TAG = "MainActivity";
 
@@ -44,13 +45,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     private void initRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        mNotesRecyclerAdapter = new NotesRecyclerAdapter(notes);
+        mNotesRecyclerAdapter = new NotesRecyclerAdapter(notes, this);
         SpacingItemDecorator itemDecorator = new SpacingItemDecorator(10);
         recyclerView.addItemDecoration(itemDecorator);
         recyclerView.setAdapter(mNotesRecyclerAdapter);
+    }
+
+    @Override
+    public void onNoteClick(int position) {
+        Log.d(TAG, "onNoteClick: Clicked nr: " + position);
+
+        Intent intent = new Intent(this, NoteActivity.class);
+        intent.putExtra("selected notes", notes.get(position));
+        startActivity(intent);
     }
 }
