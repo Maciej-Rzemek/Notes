@@ -14,7 +14,9 @@
 
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/layout_note_toolbar" />
 
         </android.support.v7.widget.Toolbar>
 
@@ -26,6 +28,6 @@
         android:layout_height="match_parent"
         android:textSize="23sp"
         android:textColor="@color/black"
-        android:padding="5dp" />
+        android:padding="5dp"/>
 
 </LinearLayout>
