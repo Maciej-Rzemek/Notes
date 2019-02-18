@@ -33,7 +33,7 @@
         android:layout_weight="10"
         android:visibility="gone">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/toolbar_check"
             android:layout_width="40dp"
             android:layout_height="40dp"
