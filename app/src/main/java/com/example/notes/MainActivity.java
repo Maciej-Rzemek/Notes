@@ -1,12 +1,14 @@
 package com.example.notes;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 
 
 import com.example.notes.adapters.NotesRecyclerAdapter;
@@ -15,7 +17,9 @@ import com.example.notes.utils.SpacingItemDecorator;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements NotesRecyclerAdapter.OnNoteListener {
+public class MainActivity extends AppCompatActivity implements
+        NotesRecyclerAdapter.OnNoteListener,
+        View.OnClickListener {
 
     private static final String TAG = "NotesListActivity";
 
@@ -32,10 +36,12 @@ public class MainActivity extends AppCompatActivity implements NotesRecyclerAdap
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mRecyclerView = findViewById(R.id.recyclerView);
-
+        ((FloatingActionButton) findViewById(R.id.fab)).setOnClickListener(this);
 
         initRecyclerView();
         insertFakeNotes();
+
+
 
         setSupportActionBar((Toolbar)findViewById(R.id.notes_toolbar));
         setTitle("Notes");
@@ -66,6 +72,12 @@ public class MainActivity extends AppCompatActivity implements NotesRecyclerAdap
     public void onNoteClick(int position) {
         Intent intent = new Intent(this, NoteActivity.class);
         intent.putExtra("selected_note", mNotes.get(position));
+        startActivity(intent);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(this, NoteActivity.class);
         startActivity(intent);
     }
 }
