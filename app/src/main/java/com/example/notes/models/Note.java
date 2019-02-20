@@ -3,11 +3,26 @@ package com.example.notes.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "notes")
+
 public class Note implements Parcelable {
 
     // variables
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
+    @ColumnInfo(name = "name")
     private String title;
+
+    @ColumnInfo(name = "content")
     private String content;
+
+    @ColumnInfo(name = "timeStamp")
     private String timeStamp;
 
     // constructors
@@ -17,12 +32,12 @@ public class Note implements Parcelable {
         this.timeStamp = timeStamp;
     }
 
+    @Ignore
     public Note() {
     }
 
-    // getters & setters
-
     protected Note(Parcel in) {
+        id = in.readInt();
         title = in.readString();
         content = in.readString();
         timeStamp = in.readString();
@@ -39,6 +54,16 @@ public class Note implements Parcelable {
             return new Note[size];
         }
     };
+
+    // getters & setters
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -64,16 +89,6 @@ public class Note implements Parcelable {
         this.timeStamp = timeStamp;
     }
 
-    // toString()
-
-    @Override
-    public String toString() {
-        return "Note{" +
-                "title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", timeStamp='" + timeStamp + '\'' +
-                '}';
-    }
 
     @Override
     public int describeContents() {
@@ -82,6 +97,7 @@ public class Note implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeString(title);
         dest.writeString(content);
         dest.writeString(timeStamp);
